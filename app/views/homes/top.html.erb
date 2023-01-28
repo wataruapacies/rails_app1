@@ -1,0 +1,10 @@
+<% if flash[:notice_log_out] %>
+  <div class="flash">
+    <%= flash[:notice_log_out] %>
+  </div>
+<% end %>
+<h1>TOP</h1>
+
+<%= link_to new_user_registration_path do %>
+  <i class="fa-solid fa-user-plus"></i>
+ <% end %>

@@ -1,0 +1,37 @@
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:notice_update] %>
+  <div class="flash">
+    <%= flash[:notice_update] %>
+  </div>
+<% end %>
+
+<div class="show_box">
+  <div class="show">
+    <h4>Title:</h4>
+    <p><%= @list.title %></p>
+  </div>
+
+  <div class="show">
+    <h4>body:</h4>
+    <p><%= @list.body %></p>
+  </div>
+  <div>投稿ユーザー画像：<%= image_tag @list.user.get_profile_image(100,100) %></div>
+  <p><%= link_to @list.user.name, user_path(@list.user.id) %></p>
+  <div>投稿日：<%= @list.created_at.strftime('%Y/%m/%d') %></div>
+</div>
+
+<div　class="click">
+  <% if @list.user == current_user %>
+    <%= link_to "Edit", edit_book_path(@list.id) %>
+  <% end %>
+  <%= link_to "Back", books_path %>
+  <% if @list.user == current_user %>
+    <%= link_to "Destroy", book_path(@list.id), method: :delete, "data-confirm" => "Are you sure?" %>
+  <% end %>
+</div>
+
+

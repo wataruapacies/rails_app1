@@ -1,0 +1,15 @@
+<% if flash[:notice_destroy] %>
+  <div class="flash">
+    <%= flash[:notice_destroy] %>
+  </div>
+<% end %>
+
+<% @users.each do |user| %>
+  <div class="record">
+    <div>ユーザー画像：<%= image_tag user.get_profile_image(100,100) %></div>
+    <div><%= link_to user.name, user_path(user.id) %></div>
+    <% if user == current_user %>
+      <%= link_to "Edit", edit_user_path(user.id) %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<% if flash[:notice_log_in] %>
+  <div class="flash">
+    <%= flash[:notice_log_in] %>
+  </div>
+<% end %>
+<% if flash[:notice_update] %>
+  <div class="flash">
+    <%= flash[:notice_update] %>
+  </div>
+<% end %>
+<div>
+  <h3>ユーザ名：<%= @user.name %></h3>
+  <div>プロフィール画像：<%= image_tag @user.get_profile_image(100,100) %></div>
+  <div>自己紹介：<%= @user.introduction %></div>
+  <% if @user == current_user %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
+  <% end %>
+</div>
+
+
+<% @user_books.each do |book| %>
+<div>
+  <p>Title：<%= book.title %></p>
+  <p>Body：<%= book.body %></p>
+</div>
+<% end %>
