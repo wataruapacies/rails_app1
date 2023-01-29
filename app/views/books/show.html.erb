@@ -49,35 +49,32 @@
         <thead>
           <tr>
             <th scope="col">
-              <%= image_tag @book.user.get_profile_image(100,100) %>
-              <%= @book.user.name %>
+              <div>
+                <%= link_to user_path(@book.user.id) do %>
+                  <%= image_tag @book.user.get_profile_image(100,100) %>
+                <% end %>
+              </div>
+              <div>
+                <%= link_to @book.user.name, user_path(@book.user.id) %>
+              </div>
             </th>
             <th scope="col"><%= @book.title %></th>
             <th scope="col"><%= @book.body %></th>
+            <% if current_user == @book.user %>
+              <th scope="col">
+                <%= link_to edit_book_path(@book.id) do %>
+                  <button type="button" class="btn btn-success">Edit</button>
+                <% end %>
+              </th>
+              <th scope="col">
+                <%= link_to book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?" do %>
+                  <button type="button" class="btn btn-danger">Destroy</button>
+                <% end %>
+              </th>
+            <% end %>
           </tr>
         </thead>
       </table>
-      <div class="show_box">
-        <div class="show">
-          <p><%= @book.title %></p>
-        </div>
-      
-        <div class="show">
-          <p><%= @book.body %></p>
-        </div>
-        <div><%= image_tag @book.user.get_profile_image(100,100) %></div>
-        <p><%= link_to @book.user.name, user_path(@book.user.id) %></p>
-      </div>
-      
-      <div　class="click">
-        <% if @book.user == current_user %>
-          <%= link_to "Edit", edit_book_path(@book.id) %>
-        <% end %>
-        <%= link_to "Back", books_path %>
-        <% if @book.user == current_user %>
-          <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?" %>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
