@@ -1,40 +1,62 @@
 <div class="container">
-  <% if flash[:notice_destroy] %>
-    <div class="flash">
-      <%= flash[:notice_destroy] %>
-    </div>
-  <% end %>
-  
-  <h1>User info</h1>
-  <%= image_tag current_user.get_profile_image(100,100) %>
-  <h3>name：<%= current_user.name %></h3>
-  <h3>introduction：<%= current_user.introduction %></h3>
-  <%= link_to edit_user_path(current_user.id) do %>
-    <button type="button" class="btn btn-outline-secondary"><i class="fas fa-user-cog"></i></button>
-  <% end %>
-  <h1>New book</h1>
-  <%= form_with model: @list,url:books_path, method: :post do |f| %>
-  
-    <h4>Title</h4>
-    <%= f.text_field :title %>
-  
-    <h4>Opinion</h4>
-    <%= f.text_area :body %>
-    <div>
-      <%= f.submit "Create Book", class:"btn btn-success" %>
-    </div>
-  
-  <% end %>
-  
-  <h1>Users</h1>
-  <% @users.each do |user| %>
-    <div class="record">
-      <div>image<%= image_tag user.get_profile_image(100,100) %></div>
-      <div><%= link_to user.name, user_path(user.id) %></div>
-      <div><%= link_to "Show", user_path(user.id) %></div>
-      <% if user == current_user %>
-        <%= link_to "Edit", edit_user_path(user.id) %>
+  <div class="row">
+    <div class="col-3">
+      <% if flash[:notice_destroy] %>
+        <div class="flash">
+          <%= flash[:notice_destroy] %>
+        </div>
+      <% end %>
+      
+      <h1>User info</h1>
+      <%= image_tag current_user.get_profile_image(100,100) %>
+      <table class="table">
+        <tr>
+          <th>name</th>
+          <th><%= current_user.name %></th>
+        </tr>
+        <tr>
+          <th>introduction</th>
+          <th><%= current_user.introduction %></th>
+        </tr>
+      </table>
+      <%= link_to edit_user_path(current_user.id) do %>
+        <button type="button" class="btn btn-outline-secondary btn-block"><i class="fas fa-user-cog"></i></button>
+      <% end %>
+      <h1>New book</h1>
+      <%= form_with model: @list,url:books_path, method: :post do |f| %>
+      
+        <h4>Title</h4>
+        <%= f.text_field :title %>
+      
+        <h4>Opinion</h4>
+        <%= f.text_area :body %>
+        <div>
+          <%= f.submit "Create Book", class:"btn btn-success" %>
+        </div>
+      
       <% end %>
     </div>
-  <% end %>
+    <div class="col-1"></div>
+    <div class="col-8">
+      <h1>Users</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">image</th>
+            <th scope="col">name</th>
+            <th scope="col"></th>
+          </tr>
+          <% @users.each do |user| %>
+            <tr>
+              <th scope="col"><%= image_tag user.get_profile_image(100,100) %></th>
+              <th scope="col"><%= user.name %></th>
+              <th scope="col">
+                <%= link_to "Show", user_path(user.id) %>
+              </th>
+            </tr>
+          <% end %>
+        </thead>
+      </table>
+    </div>
+  </div>
 </div>

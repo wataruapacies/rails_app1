@@ -1,65 +1,77 @@
 <div class="container">
-  <% if flash[:notice_destroy] %>
-    <div class="flash">
-      <%= flash[:notice_destroy] %>
-    </div>
-  <% end %>
-  
-  <h1>User info</h1>
-  <%= image_tag current_user.get_profile_image(100,100) %>
-  <h3>name：<%= current_user.name %></h3>
-  <h3>introduction：<%= current_user.introduction %></h3>
-  
-  <%= link_to edit_user_path(current_user.id) do %>
-    <button type="button" class="btn btn-outline-secondary"><i class="fas fa-user-cog"></i></button>
-  <% end %>
-  <h1>New book</h1>
-  <% if @list.errors.any? %>
-    <div class="error_box">
-      <%= @list.errors.count %> errors prohibited this book from being saved:
-      <div class="error">
-        <ul>
-          <% @list.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-  
-  <%= form_with model: @list,url:books_path, method: :post do |f| %>
-  
-    <h4>Title</h4>
-    <%= f.text_field :title %>
-  
-    <h4>Opinion</h4>
-    <%= f.text_area :body %>
-    <div>
-      <%= f.submit "Create Book", class:"btn btn-success" %>
-    </div>
-  
-  <% end %>
-  
-  
-  
-  <h1>Books</h1>
-  
-  
-  
-  <% @lists.each do |list| %>
-    <div>
-      <div>投稿ユーザー画像：<%= image_tag list.user.get_profile_image(100,100) %></div>
-      <div class="book_title"><%= list.title %></div>
-      <div class="book_body"><%= list.body %></div>
-      <%= link_to "Show", book_path(list.id) %>
-      <% if list.user == current_user %>
-        <%= link_to "Edit", edit_book_path(list.id) %>
-        <%= link_to "Destroy", book_path(list.id), method: :delete, "data-confirm" => "Are you sure?" %>
+  <div class="row">
+    <div class="col-3">
+      <% if flash[:notice_destroy] %>
+        <div class="flash">
+          <%= flash[:notice_destroy] %>
+        </div>
+      <% end %>
+
+      <h1>User info</h1>
+      <%= image_tag current_user.get_profile_image(100,100) %>
+      <table class="table">
+        <tr>
+          <th>name</th>
+          <th><%= current_user.name %></th>
+        </tr>
+        <tr>
+          <th>introduction</th>
+          <th><%= current_user.introduction %></th>
+        </tr>
+      </table>
+      <%= link_to edit_user_path(current_user.id) do %>
+        <button type="button" class="btn btn-outline-secondary btn-block"><i class="fas fa-user-cog"></i></button>
+      <% end %>
+      <h1>New book</h1>
+      <% if @list.errors.any? %>
+        <div class="error_box">
+          <%= @list.errors.count %> errors prohibited this book from being saved:
+          <div class="error">
+            <ul>
+              <% @list.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <%= form_with model: @list,url:books_path, method: :post do |f| %>
+
+        <h4>Title</h4>
+        <%= f.text_field :title %>
+
+        <h4>Opinion</h4>
+        <%= f.text_area :body %>
+        <div>
+          <%= f.submit "Create Book", class:"btn btn-success" %>
+        </div>
+
       <% end %>
     </div>
-  <% end %>
-  
-  <div class="white"></div>
-  
+    <div class="col-1"></div>
+    <div class="col-8">
+      <h1>Books</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Opinion</th>
+          </tr>
+          <% @lists.each do |list| %>
+            <tr>
+              <th scope="col">
+                <%= link_to user_path(list.user.id) do %>
+                  <%= image_tag list.user.get_profile_image(100,100) %>
+                <% end %>
+              </th>
+              <th scope="col"><%= link_to list.title, book_path(list.id) %></th>
+              <th scope="col"><%= list.body %></th>
+            </tr>
+          <% end %>
+        </thead>
+      </table>
+    </div>
+  </div>
 
 </div>
