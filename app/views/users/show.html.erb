@@ -1,53 +1,49 @@
-<% if flash[:notice_sign_up] %>
-  <div class="flash">
-    <%= flash[:notice_sign_up] %>
-  </div>
-<% end %>
-<% if flash[:notice_log_in] %>
-  <div class="flash">
-    <%= flash[:notice_log_in] %>
-  </div>
-<% end %>
-<% if flash[:notice_update] %>
-  <div class="flash">
-    <%= flash[:notice_update] %>
-  </div>
-<% end %>
-
-<h1>User info</h1>
-<%= image_tag @user.get_profile_image(100,100) %>
-<h3>name：<%= @user.name %></h3>
-<h3>introduction：<%= @user.introduction %></h3>
-<%= link_to edit_user_path(@user.id) do %>
-  <button type="button" class="btn btn-outline-secondary"><i class="fas fa-user-cog"></i></button>
-<% end %>
-
-<div>
-  <h3>ユーザ名：<%= @user.name %></h3>
-  <div>プロフィール画像：<%= image_tag @user.get_profile_image(100,100) %></div>
-  <div>自己紹介：<%= @user.introduction %></div>
-  <% if @user == current_user %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
+<div class="container">
+  <% if flash[:notice_sign_up] %>
+    <div class="flash">
+      <%= flash[:notice_sign_up] %>
+    </div>
   <% end %>
-</div>
-
-
-<% @user_books.each do |book| %>
-<div>
-  <p>Title：<%= book.title %></p>
-  <p>Body：<%= book.body %></p>
-</div>
-<% end %>
-
-<%= form_with model: @list,url:books_path, method: :post do |f| %>
-
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-
-  <h4>Body</h4>
-  <%= f.text_area :body %>
+  <% if flash[:notice_log_in] %>
+    <div class="flash">
+      <%= flash[:notice_log_in] %>
+    </div>
+  <% end %>
+  <% if flash[:notice_update] %>
+    <div class="flash">
+      <%= flash[:notice_update] %>
+    </div>
+  <% end %>
+  
+  <h1>User info</h1>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <h3>name：<%= @user.name %></h3>
+  <h3>introduction：<%= @user.introduction %></h3>
+  <%= link_to edit_user_path(@user.id) do %>
+    <button type="button" class="btn btn-outline-secondary"><i class="fas fa-user-cog"></i></button>
+  <% end %>
+  
+  <h1>New book</h1>
+  <%= form_with model: @list,url:books_path, method: :post do |f| %>
+  
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+  
+    <h4>Opinion</h4>
+    <%= f.text_area :body %>
+    <div>
+      <%= f.submit "Create Book", class:"btn btn-success" %>
+    </div>
+  
+  <% end %>
+  <h1>Books</h1>
+  <% @user_books.each do |book| %>
   <div>
-    <%= f.submit "Create Book", class:"btn btn-success" %>
+    <%= image_tag @user.get_profile_image(100,100) %>
+    <p>Title：<%= link_to book.title, book_path(book.id) %></p>
+    <p>Opinion：<%= book.body %></p>
   </div>
+  <% end %>
 
-<% end %>
+
+</div>

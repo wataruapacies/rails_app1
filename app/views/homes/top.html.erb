@@ -4,18 +4,26 @@
   </div>
 <% end %>
 
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div style="text-align:center; padding: 15px"><h1>welcome to <i class="fas fa-book"></i>Bookers!!</h1></div>
+      <div style="padding: 15px">In <i class="fas fa-book"></i><b>Bookers</b>,</div>
+      <div style="padding: 15px">you can share and exchange your opinions , inpressions , and emotions<br>about various books!</div>
+      <div style="text-align:center; padding: 15px">
+        <%= link_to new_user_session_path do %>
+          <button type="button" class="btn btn-info btn-block">Log in</button>
+        <% end %>
+      </div>
+      <div style="text-align:center; padding: 15px">
+        <%= link_to new_user_registration_path do %>
+          <button type="button" class="btn btn-success btn-block">Sign up</button>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>
 
 
-<div><h1>Welcome to <i class="fas fa-book"></i>Bookers!!</h1></div>
-<div>In <i class="fas fa-book"></i><b>Bookers</b>,</div>
-<div>you can share and exchange your opinions , inpressions , and emotions<br><br>about various books!</div>
-<div>
-  <%= link_to new_user_session_path do %>
-    <button type="button" class="btn btn-info">Log in</button>
-  <% end %>
-</div>
-<div>
-  <%= link_to new_user_registration_path do %>
-    <button type="button" class="btn btn-success">Sign up</button>
-  <% end %>
-</div>

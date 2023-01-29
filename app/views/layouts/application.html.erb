@@ -2,65 +2,74 @@
 <html>
   <head>
     <script src="https://kit.fontawesome.com/3d80c49399.js" crossorigin="anonymous"></script>
-    <title>Sub1</title>
+    <title>Bookers2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <nav class="navbar bg-dark">
-        <div class="container">
+        <div class="container w-100">
           <div class="row w-100">
-            <div class="col-sm-2">
+            <div class="col-1">
               <%= link_to root_path do %>
                 <font color="white">Bookers</font>
               <% end %>
-              
             </div>
-            <div class="col-sm-2"></div>
+            <div class="col-3"></div>
             <% if user_signed_in? %>
-              <div class="col-sml-2">
-                <%= link_to "Home", user_path(current_user.id) %>
+              <div class="col-2 text-nowrap">
+                <%= link_to user_path(current_user.id) do %>
+                  <font color="white"><i class="fas fa-home"></i> Home</font>
+                <% end %>
               </div>
-              <div class="col-sm-2">
-                <%= link_to "Users", users_path %>
+              <div class="col-2 text-nowrap">
+                <%= link_to users_path do %>
+                  <font color="white"><i class="fas fa-users"></i> Users</font>
+                <% end %>
               </div>
-              <div class="col-sm-2">
-                <%= link_to "Books", books_path %>
+              <div class="col-2 text-nowrap">
+                <%= link_to books_path do %>
+                  <font color="white"><i class="fas fa-book-open"></i> Books</font>
+                <% end %>
               </div>
-              <div class="col-sm-2">
-                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+              <div class="col-2 text-nowrap">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <font color="white"><i class="fas fa-sign-out-alt"></i> Log out</font>
+                <% end %>
               </div>
             <% else %>
-              <div class="col-sm-2">
-                <%= link_to "Home", root_path %>
+              <div class="col-2 text-nowrap">
+                <%= link_to root_path do %>
+                  <font color="white"><i class="fas fa-home"></i> Home</font>
+                <% end %>
               </div>
-              <div class="col-sm-2">
-                <%= link_to "About", about_path %>
+              <div class="col-2 text-nowrap">
+                <%= link_to about_path do %>
+                  <font color="white"><i class="fas fa-link"></i> About</font>
+                <% end %>
               </div>
-              <div class="col-sm-2">
-                <%= link_to "Sign Up", new_user_registration_path %>
+              <div class="col-2 text-nowrap">
+                <%= link_to new_user_registration_path do %>
+                  <font color="white"><i class="fas fa-user-plus"></i> Sign up</font>
+                <% end %>
               </div>
-      
-              <div class="col-sm-2">
-                <%= link_to "Log in", new_user_session_path %>
+              <div class="col-2 text-nowrap">
+                <%= link_to new_user_session_path do %>
+                  <font color="white"><i class="fas fa-sign-in-alt"></i> Log in</font>
+                <% end %>
               </div>
             <% end %>
           </div>
-
         </div>
-
       </nav>
-
     </header>
     <%= yield %>
     <footer>
-      <h6>CopyRight Infratop.inc</h6>
+      <div style="text-align:center">CopyRight Infratop.inc</div>
     </footer>
   </body>
 </html>

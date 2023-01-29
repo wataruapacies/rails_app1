@@ -1,27 +1,36 @@
-<h2>User info</h2>
-<% if @user.errors.any? %>
-  <div class="error_box">
-    <%= @user.errors.count %> errors prohibited this book from being saved:
-    <div class="error">
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <h2>User info</h2>
+      <% if @user.errors.any? %>
+        <div class="error_box">
+          <%= @user.errors.count %> errors prohibited this book from being saved:
+          <div class="error">
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <%= form_with model: @user do |f| %>
+        
+        <label for="inputName">Name</label>
+        <div><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%></div>
+        
+        <label for="inputImage">Image</label>
+        <div><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></div>
+        
+        <label for="inputName">Introduction</label>
+        <div><%= f.text_field :introduction, autofocus: true, id:"inputName", placeholder:""%></div>
+        
+        
+        <%= f.submit "Update User", class:"btn btn-secondary" %>
+      <% end %>
     </div>
+    <div class="col-3"></div>
   </div>
-<% end %>
-<%= form_with model: @user do |f| %>
-  
-  <label for="inputName">Name</label>
-  <div><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%></div>
-  
-  <label for="inputImage">Image</label>
-  <div><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></div>
-  
-  <label for="inputName">Introduction</label>
-  <div><%= f.text_field :introduction, autofocus: true, id:"inputName", placeholder:""%></div>
-  
-  
-  <%= f.submit "Update User", class:"btn btn-secondary" %>
-<% end %>
+
+</div>
