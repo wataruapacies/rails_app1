@@ -3,7 +3,7 @@
   <head>
     <script src="https://kit.fontawesome.com/3d80c49399.js" crossorigin="anonymous"></script>
     <title>Sub1</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,38 +13,54 @@
 
   <body>
     <header>
-      <li>
-        <%= link_to "Bookers", root_path %>
-      </li>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "Home", user_path(current_user.id) %>
-        </li>
-        <li>
-          <%= link_to "Users", users_path %>
-        </li>
-        <li>
-          <%= link_to "Books", books_path %>
-        </li>
-        <li>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Home", root_path %>
-        </li>
-        <li>
-          <%= link_to "About", about_path %>
-        </li>
-        <li>
-          <%= link_to "Sign Up", new_user_registration_path %>
-        </li>
+      <nav class="navbar bg-dark">
+        <div class="container">
+          <div class="row w-100">
+            <div class="col-sm-2">
+              <%= link_to root_path do %>
+                <font color="white">Bookers</font>
+              <% end %>
+              
+            </div>
+            <div class="col-sm-2"></div>
+            <% if user_signed_in? %>
+              <div class="col-sml-2">
+                <%= link_to "Home", user_path(current_user.id) %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to "Users", users_path %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to "Books", books_path %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+              </div>
+            <% else %>
+              <div class="col-sm-2">
+                <%= link_to "Home", root_path %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to "About", about_path %>
+              </div>
+              <div class="col-sm-2">
+                <%= link_to "Sign Up", new_user_registration_path %>
+              </div>
+      
+              <div class="col-sm-2">
+                <%= link_to "Log in", new_user_session_path %>
+              </div>
+            <% end %>
+          </div>
 
-        <li>
-          <%= link_to "Log in", new_user_session_path %>
-        </li>
-      <% end %>
+        </div>
+
+      </nav>
+
     </header>
     <%= yield %>
+    <footer>
+      <h6>CopyRight Infratop.inc</h6>
+    </footer>
   </body>
 </html>

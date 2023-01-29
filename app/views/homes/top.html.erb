@@ -3,8 +3,19 @@
     <%= flash[:notice_log_out] %>
   </div>
 <% end %>
-<h1>TOP</h1>
 
-<%= link_to new_user_registration_path do %>
-  <i class="fa-solid fa-user-plus"></i>
- <% end %>
+
+
+<div><h1>Welcome to <i class="fas fa-book"></i>Bookers!!</h1></div>
+<div>In <i class="fas fa-book"></i><b>Bookers</b>,</div>
+<div>you can share and exchange your opinions , inpressions , and emotions<br><br>about various books!</div>
+<div>
+  <%= link_to new_user_session_path do %>
+    <button type="button" class="btn btn-info">Log in</button>
+  <% end %>
+</div>
+<div>
+  <%= link_to new_user_registration_path do %>
+    <button type="button" class="btn btn-success">Sign up</button>
+  <% end %>
+</div>
