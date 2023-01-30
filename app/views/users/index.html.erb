@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
       <% if flash[:notice_destroy] %>
         <div class="flash">
           <%= flash[:notice_destroy] %>
@@ -36,8 +36,7 @@
       
       <% end %>
     </div>
-    <div class="col-1"></div>
-    <div class="col-8">
+    <div class="col-md-8 offset-md-1">
       <h1>Users</h1>
       <table class="table">
         <thead>
