@@ -59,7 +59,11 @@
           </tr>
           <% @user_books.each do |book| %>
             <tr>
-              <th scope="col"><%= image_tag @user.get_profile_image(100,100) %></th>
+              <th scope="col">
+                <%= link_to user_path(@user.id) do %>
+                  <%= image_tag @user.get_profile_image(100,100) %>
+                <% end 
+              </th>
               <th scope="col"><%= link_to book.title, book_path(book.id) %></th>
               <th scope="col"><%= book.body %></th>
             </tr>
