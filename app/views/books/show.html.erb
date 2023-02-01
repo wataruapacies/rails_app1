@@ -66,12 +66,12 @@
             <th scope="col"><%= "コメント数：#{@book.book_comments.count}" %></th>
             <% if current_user == @book.user %>
               <th scope="col">
-                <div >
+                <div style="padding: 15px">
                   <%= link_to edit_book_path(@book.id) do %>
                     <button type="button" class="btn btn-success btn-block">Edit</button>
                   <% end %>
                 </div>
-                <div>
+                <div style="padding: 15px">
                   <%= link_to book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?" do %>
                     <button type="button" class="btn btn-danger btn-block">Destroy</button>
                   <% end %>
@@ -89,18 +89,23 @@
           </div>
         <% end %>
         <p>コメント件数：<%= @book.book_comments.count %></p>
-        <% @book.book_comments.each do |post_comment| %>
-          <table>
-            <thead>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+            <% @book.book_comments.each do |post_comment| %>
               <tr>
                 <th scope="col">
-                  <p>
+                  <div>
                     <%= image_tag post_comment.user.get_profile_image(100,100) %>
-                  </p>
+                  </div>
                   <%= link_to post_comment.user.name, user_path(post_comment.user.id) %>
                 </th>
                 <th scope="col"><%= post_comment.comment %></th>
-                <th scope="col">
+                <th style="padding: 15px" scope="col">
                   <% if post_comment.user == current_user %>
                     <%= link_to book_book_comment_path(post_comment.book, post_comment), method: :delete do %>
                       <button type="button" class="btn btn-danger">Destroy</button>
@@ -108,9 +113,9 @@
                   <% end %>
                 </th>
               </tr>
-            </thead>
-          </table>
-        <% end %>
+            <% end %>
+          </thead>
+        </table>
       </div>
       <div>
         <% if @error_comment.present? %>
