@@ -43,8 +43,8 @@
             <th scope="col"></th>
             <th scope="col">Title</th>
             <th scope="col">Opinion</th>
-            <th scope="col">Comment</th>
             <th scope="col">Favorite</th>
+            <th scope="col">Comment</th>
           </tr>
           <% @lists.each do |list| %>
             <tr>
@@ -55,7 +55,6 @@
               </th>
               <th scope="col"><%= link_to list.title, book_path(list.id) %></th>
               <th scope="col"><%= list.body %></th>
-              <th scope="col"><%= link_to "#{list.book_comments.count} コメント", book_path(list.id) %></th>
               <th scope="col">
                 <% if list.favorited_by?(current_user) %>
                   <p>
@@ -73,6 +72,7 @@
                   </p>
                 <% end %>
               </th>
+              <th scope="col"><%= "コメント数：#{list.book_comments.count}" %></th>
             </tr>
           <% end %>
         </thead>

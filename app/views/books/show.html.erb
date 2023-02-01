@@ -46,7 +46,6 @@
             </th>
             <th scope="col"><%= @book.title %></th>
             <th scope="col"><%= @book.body %></th>
-            <th scope="col"><%= link_to "#{@book.book_comments.count} コメント", book_path(@book.id) %></th>
             <th scope="col">
               <% if @book.favorited_by?(current_user) %>
                 <p>
@@ -64,17 +63,21 @@
                 </p>
               <% end %>
             </th>
+            <th scope="col"><%= "コメント数：#{@book.book_comments.count}" %></th>
             <% if current_user == @book.user %>
               <th scope="col">
-                <%= link_to edit_book_path(@book.id) do %>
-                  <button type="button" class="btn btn-success">Edit</button>
-                <% end %>
+                <div >
+                  <%= link_to edit_book_path(@book.id) do %>
+                    <button type="button" class="btn btn-success btn-block">Edit</button>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?" do %>
+                    <button type="button" class="btn btn-danger btn-block">Destroy</button>
+                  <% end %>
+                </div>
               </th>
-              <th scope="col">
-                <%= link_to book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?" do %>
-                  <button type="button" class="btn btn-danger">Destroy</button>
-                <% end %>
-              </th>
+            <% else %>
             <% end %>
           </tr>
         </thead>
@@ -98,6 +101,16 @@
         <% end %>
       </div>
       <div>
+        <% if @error_comment.present? %>
+          <div id="error_explanation">
+            <h2><%= @error_comment.errors.count %> errors prohibited this book from being saved:</h2>
+            <ul>
+              <% @error_comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
         <%= form_with model: [@book, @book_comment] do |f| %>
           <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
           <%= f.submit "送信する" %>
