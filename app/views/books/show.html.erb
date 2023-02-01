@@ -90,20 +90,32 @@
         <% end %>
         <p>コメント件数：<%= @book.book_comments.count %></p>
         <% @book.book_comments.each do |post_comment| %>
-          <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-          <%= link_to post_comment.user.name, user_path(post_comment.user.id) %>
-          <%= post_comment.comment %>
-          <% if post_comment.user == current_user %>
-            <%= link_to book_book_comment_path(post_comment.book, post_comment), method: :delete do %>
-              <button type="button" class="btn btn-danger">Destroy</button>
-            <% end %>
-          <% end %>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">
+                  <p>
+                    <%= image_tag post_comment.user.get_profile_image(100,100) %>
+                  </p>
+                  <%= link_to post_comment.user.name, user_path(post_comment.user.id) %>
+                </th>
+                <th scope="col"><%= post_comment.comment %></th>
+                <th scope="col">
+                  <% if post_comment.user == current_user %>
+                    <%= link_to book_book_comment_path(post_comment.book, post_comment), method: :delete do %>
+                      <button type="button" class="btn btn-danger">Destroy</button>
+                    <% end %>
+                  <% end %>
+                </th>
+              </tr>
+            </thead>
+          </table>
         <% end %>
       </div>
       <div>
         <% if @error_comment.present? %>
           <div id="error_explanation">
-            <h2><%= @error_comment.errors.count %> errors prohibited this book from being saved:</h2>
+            <h6><%= @error_comment.errors.count %> errors prohibited this book from being saved:</h6>
             <ul>
               <% @error_comment.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -113,7 +125,7 @@
         <% end %>
         <%= form_with model: [@book, @book_comment] do |f| %>
           <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
+          <%= f.submit "送信" %>
         <% end %>
       </div>
     </div>

@@ -2,18 +2,18 @@ class BookCommentsController < ApplicationController
   before_action :is_matching_login_user, only: [:destroy]
 
   def create
-    book = Book.find(params[:book_id])
-    comment = BookComment.new(book_comment_params)
-    comment.user_id = current_user.id
-    comment.book_id = book.id
-    if comment.save
-      redirect_to book_path(book)
+    @book = Book.find(params[:book_id])
+    @comment = BookComment.new(book_comment_params)
+    @comment.user_id = current_user.id
+    @comment.book_id = @book.id
+    k = @comment
+    if @comment.save
+      redirect_to book_path(@book)
     else
-      @error_comment = comment
+      @error_comment = k
       @list = Book.new
-      @book = Book.find(params[:book_id])
       @book_comment = BookComment.new
-      render 'books/show'
+      render "books/show"
     end
   end
 
