@@ -50,14 +50,16 @@
             <th scope="col">
               <% if @book.favorited_by?(current_user) %>
                 <p>
-                  <%= link_to book_favorites_path(@book), method: :delete do %>
-                    A<%= @book.favorites.count %> いいね
+                  <%= link_to book_favorites_path(@book), :style=>"color:red", method: :delete do %>
+                    <i class="fas fa-heart"></i>
+                    <%= @book.favorites.count %>
                   <% end %>
                 </p>
                 <% else %>
                 <p>
                   <%= link_to book_favorites_path(@book), method: :post do %>
-                    B<%= @book.favorites.count %> いいね
+                    <i class="fas fa-heart"></i>
+                    <%= @book.favorites.count %>
                   <% end %>
                 </p>
               <% end %>
