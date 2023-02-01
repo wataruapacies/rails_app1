@@ -42,6 +42,8 @@
             <th scope="col"></th>
             <th scope="col">Title</th>
             <th scope="col">Opinion</th>
+            <th scope="col">Favorite</th>
+            <th scope="col">Comment</th>
           </tr>
           <% @user_books.each do |book| %>
             <tr>
@@ -52,6 +54,27 @@
               </th>
               <th scope="col"><%= link_to book.title, book_path(book.id) %></th>
               <th scope="col"><%= book.body %></th>
+            
+              <th scope="col">
+                
+                <% if book.favorited_by?(current_user) %>
+                  <p>
+                    <%= link_to book_favorites_path(book), :style=>"color:red", method: :delete do %>
+                      <i class="fas fa-heart"></i>
+                      <%= book.favorites.count %>
+                    <% end %>
+                  </p>
+                  <% else %>
+                  <p>
+                    <%= link_to book_favorites_path(book), method: :post do %>
+                      <i class="fas fa-heart"></i>
+                      <%= book.favorites.count %>
+                    <% end %>
+                  </p>
+                <% end %>
+              </th>
+              <th scope="col"><%= "コメント数：#{book.book_comments.count}" %></th>
+            
             </tr>
           <% end %>
         </thead>
