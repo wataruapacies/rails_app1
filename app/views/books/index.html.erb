@@ -43,6 +43,7 @@
             <th scope="col"></th>
             <th scope="col">Title</th>
             <th scope="col">Opinion</th>
+            <th scope="col">Comment</th>
           </tr>
           <% @lists.each do |list| %>
             <tr>
@@ -53,6 +54,7 @@
               </th>
               <th scope="col"><%= link_to list.title, book_path(list.id) %></th>
               <th scope="col"><%= list.body %></th>
+              <th scope="col"><%= link_to "#{list.book_comments.count} コメント", book_path(list.id) %></th>
             </tr>
           <% end %>
         </thead>
