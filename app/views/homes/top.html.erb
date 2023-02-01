@@ -12,14 +12,10 @@
       <div style="padding: 15px">In <i class="fas fa-book"></i><b>Bookers</b>,</div>
       <div style="padding: 15px">you can share and exchange your opinions , inpressions , and emotions<br>about various books!</div>
       <div style="text-align:center; padding: 15px">
-        <%= link_to new_user_session_path do %>
-          <button type="button" class="btn btn-info btn-block">Log in</button>
-        <% end %>
+        <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-block" %>
       </div>
       <div style="text-align:center; padding: 15px">
-        <%= link_to new_user_registration_path do %>
-          <button type="button" class="btn btn-success btn-block">Sign up</button>
-        <% end %>
+        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-block" %>
       </div>
     </div>
     <div class="col-3"></div>
