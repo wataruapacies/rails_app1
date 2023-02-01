@@ -71,9 +71,8 @@
         <p>コメント件数：<%= @book.book_comments.count %></p>
         <% @book.book_comments.each do |post_comment| %>
           <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-          <%= post_comment.user.name %>
-          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-          <%= post_comment.id %>
+          <%= link_to post_comment.user.name, user_path(post_comment.user.id) %>
+
           <%= post_comment.comment %>
           <% if post_comment.user == current_user %>
             <%= link_to book_book_comment_path(post_comment.book, post_comment), method: :delete do %>
